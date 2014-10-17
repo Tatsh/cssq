@@ -6,6 +6,33 @@ You can pass standard input or you can use a URI in the arguments to `cssq`. Not
 
 If you pass a URI to `cssq` the request is made via GET method and nothing beyond this is supported such as authentication or cookies.
 
+# Installation
+
+## Pip
+
+```bash
+pip install cssq
+```
+
+## Clone the repository
+
+Note: please use a virtualenv.
+
+```
+git clone git://github.com:Tatsh/cssq.git
+cd cssq
+# Get beautifulsoup4>=4.3.2
+# Get requests>=2.4.1
+# Get html5lib>=0.999
+python setup.py install
+```
+
+If you want to use pip for all this manually:
+
+```bash
+pip install -e .
+```
+
 # Examples
 
 ## Use a URL
@@ -25,7 +52,7 @@ Note that if only one matching element is found, that element is printed (index 
 If JSON is printed, you may want to consider piping to `jq` for even more complex filtering. Example getting the first element:
 
 ```bash
-./cssq 'https://stackoverflow.com/' 'li' | jq .[0]
+cssq 'https://stackoverflow.com/' 'li' | jq .[0]
 ```
 
 Output (truncated):
