@@ -12,7 +12,7 @@ setup(
     description='Filter HTML with a CSS query.',
     long_description='''Filter HTML with a CSS query.
 
-See %{url} for more information.'''.format(url=github_url),
+See {url} for more information.'''.format(url=github_url),
     scripts=['bin/cssq'],
     install_requires=[
         'beautifulsoup4>=4.3.2',
