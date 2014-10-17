@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+import argparse
+import json
+import sys
+
+from bs4 import BeautifulSoup as Soup
+
+import requests
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser('Filter HTML with a CSS query')
+
+    parser.add_argument('uri', metavar='URI', nargs=1)
+    parser.add_argument('query', metavar='QUERY', nargs=1)
+
+    uri = None
+    if sys.stdin.isatty(): # if not piped into
+        args = parser.parse_args()
+        uri = args.uri[0]
+        query = args.query[0]
+    else:
+        query = sys.argv[1]
+
+    if uri:
+        r = requests.get(uri)
+        soup = Soup(r.content, 'html5lib')
+    else:
+        soup = Soup(sys.stdin.read(), 'html5lib')
+
+    found = soup.select(query)
+    if len(found) == 1:
+        print(found[0])
+    else:
+        print(json.dumps([str(x) for x in found]))
